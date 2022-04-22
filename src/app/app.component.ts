@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TransferenciaService } from './services/transferencia.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bytebank';
-  transferencias: any[] = [];
+
+  //Metadata Decorator @Injectable na classe de service permite a injeção de dependencia dos servicos
+  //sendo nescessario apenas receber no contrutor para utilizacao
+  constructor(private service: TransferenciaService){
+
+  };
 
   transferir($event){
-    //console.log($event);
-    const transferencia = {...$event, data: new Date()};
-    console.log(transferencia);
-    this.transferencias.push(transferencia);
+    this.service.adicionar($event);
   }
 }
